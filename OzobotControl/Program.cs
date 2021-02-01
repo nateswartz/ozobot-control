@@ -38,9 +38,14 @@ namespace OzobotControl
             var stopCommand = "50-02-01";
             await kernel.SendBytesAsync(BytesStringUtil.StringToData(stopCommand));
 
-            Console.WriteLine("Enter a command (i.e. 44-FF-FF-37-35-FF):");
-            var command = Console.ReadLine();
-            await kernel.SendBytesAsync(BytesStringUtil.StringToData(command));
+            while (true)
+            {
+                Console.WriteLine("Enter a command (i.e. 44-FF-FF-37-35-FF):");
+                var command = Console.ReadLine();
+                if (string.IsNullOrEmpty(command))
+                    break;
+                await kernel.SendBytesAsync(BytesStringUtil.StringToData(command));
+            }
 
             //// Control all lights
             //var lightOff = "44-FF-FF-00-00-00";
