@@ -10,12 +10,13 @@ namespace BluetoothWinRT
 {
     public class WinRTBluetoothAdapter : IBluetoothAdapter
     {
+        private const ushort LegoCompanyId = 919;
+        private const ushort OzobotCompanyId = 1003;
+
         public void Discover(Func<BluetoothDeviceInfo, Task> discoveryHandler, CancellationToken cancellationToken = default)
         {
             BluetoothLEAdvertisementWatcher watcher = new BluetoothLEAdvertisementWatcher();
             watcher.ScanningMode = BluetoothLEScanningMode.Active;
-            //watcher.AdvertisementFilter.Advertisement.
-            //watcher.AdvertisementFilter.Advertisement.ServiceUuids.Add(new Guid(BluetoothConstants.LegoHubService));
 
             watcher.Received += ReceivedHandler;
 
@@ -30,9 +31,13 @@ namespace BluetoothWinRT
             async void ReceivedHandler(BluetoothLEAdvertisementWatcher watcher, BluetoothLEAdvertisementReceivedEventArgs eventArgs)
             {
                 var info = new BluetoothDeviceInfo();
-
                 if (eventArgs.Advertisement.ManufacturerData.Count > 0)
                 {
+                    var companyId = eventArgs.Advertisement.ManufacturerData[0].CompanyId;
+
+                    if (companyId != LegoCompanyId && companyId != OzobotCompanyId)
+                        return;
+
                     var reader = DataReader.FromBuffer(eventArgs.Advertisement.ManufacturerData[0].Data);
                     var data = new byte[reader.UnconsumedBufferLength];
                     reader.ReadBytes(data);
@@ -41,7 +46,7 @@ namespace BluetoothWinRT
 
                     using (var device = BluetoothLEDevice.FromBluetoothAddressAsync(eventArgs.BluetoothAddress).AsTask().Result)
                     {
-                        if (device == null)//|| !device.Name.StartsWith("Ozo"))
+                        if (device == null)
                             return;
 
                         info.Name = device.Name;
