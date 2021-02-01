@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzobotControl", "OzobotControl\OzobotControl.csproj", "{CD1DE8C4-55B9-4CB3-BFFD-21CAC3F28F20}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluetoothBase", "BluetoothBase\BluetoothBase.csproj", "{8F634BE2-6A9C-40E1-878A-86AEBBED4057}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluetoothWinRT", "BluetoothWinRT\BluetoothWinRT.csproj", "{BCA80EEA-6CDE-4DFD-9386-C1DD3E96F257}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD1DE8C4-55B9-4CB3-BFFD-21CAC3F28F20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD1DE8C4-55B9-4CB3-BFFD-21CAC3F28F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD1DE8C4-55B9-4CB3-BFFD-21CAC3F28F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD1DE8C4-55B9-4CB3-BFFD-21CAC3F28F20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F634BE2-6A9C-40E1-878A-86AEBBED4057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F634BE2-6A9C-40E1-878A-86AEBBED4057}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F634BE2-6A9C-40E1-878A-86AEBBED4057}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F634BE2-6A9C-40E1-878A-86AEBBED4057}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCA80EEA-6CDE-4DFD-9386-C1DD3E96F257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCA80EEA-6CDE-4DFD-9386-C1DD3E96F257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCA80EEA-6CDE-4DFD-9386-C1DD3E96F257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCA80EEA-6CDE-4DFD-9386-C1DD3E96F257}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7CF5176E-FC8E-4E2F-B9D2-C975310B8D98}
+	EndGlobalSection
+EndGlobal

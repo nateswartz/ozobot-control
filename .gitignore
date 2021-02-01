@@ -1,0 +1,11 @@
+.vs/
+OzobotControl/bin/
+OzobotControl/obj/
+SharpBrick.PoweredUp.WinRT/obj/
+SharpBrick.PoweredUp/bin/
+SharpBrick.PoweredUp/obj/
+SharpBrick.PoweredUp.WinRT/bin/
+BluetoothBase/obj/
+BluetoothWinRT/bin/
+BluetoothWinRT/obj/
+BluetoothBase/bin/
