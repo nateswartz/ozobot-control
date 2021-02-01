@@ -28,15 +28,6 @@ namespace BluetoothWinRT
 
         public async Task<IBluetoothService> GetServiceAsync(Guid serviceId)
         {
-            var services = (await _device.GetGattServicesAsync()).Services.ToList();
-            foreach (var service in services)
-            {
-                var characteristics = (await service.GetCharacteristicsAsync()).Characteristics.ToList();
-                foreach (var characteristic in characteristics)
-                {
-                    Console.WriteLine($"{service.Uuid}: {characteristic.Uuid}");
-                }
-            }
             var gatt = await _device.GetGattServicesForUuidAsync(serviceId);
 
             if (gatt.Status == GattCommunicationStatus.Success)

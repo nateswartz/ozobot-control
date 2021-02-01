@@ -15,7 +15,7 @@ namespace BluetoothWinRT
             BluetoothLEAdvertisementWatcher watcher = new BluetoothLEAdvertisementWatcher();
             watcher.ScanningMode = BluetoothLEScanningMode.Active;
             //watcher.AdvertisementFilter.Advertisement.
-            //watcher.AdvertisementFilter.Advertisement.ServiceUuids.Add(new Guid(PoweredUpBluetoothConstants.LegoHubService));
+            //watcher.AdvertisementFilter.Advertisement.ServiceUuids.Add(new Guid(BluetoothConstants.LegoHubService));
 
             watcher.Received += ReceivedHandler;
 
@@ -41,18 +41,10 @@ namespace BluetoothWinRT
 
                     using (var device = BluetoothLEDevice.FromBluetoothAddressAsync(eventArgs.BluetoothAddress).AsTask().Result)
                     {
-                        if (device == null || !device.Name.StartsWith("Ozo"))
+                        if (device == null)//|| !device.Name.StartsWith("Ozo"))
                             return;
 
                         info.Name = device.Name;
-                        if (device.Name == "OzoR2")
-                        {
-                            var services = await device.GetGattServicesAsync();
-                            foreach (var service in services.Services)
-                            {
-                                var uuid = service.Uuid;
-                            }
-                        }
                     }
 
                 }

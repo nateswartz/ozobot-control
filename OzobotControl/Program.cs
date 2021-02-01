@@ -14,13 +14,20 @@ namespace OzobotControl
             adapter.Discover(async info =>
             {
                 Console.WriteLine($"Discovered device: {info.Name}");
-                var device = await adapter.GetDeviceAsync(info.BluetoothAddress);
-                var service = await device.GetServiceAsync(new Guid(BluetoothConstants.OzobotService));
-                var characteristic = await service.GetCharacteristicAsync(new Guid(BluetoothConstants.OzobotControlCharacteristic));
+                if (!info.Name.StartsWith("Ozo"))
+                    return;
+                var kernel = new BluetoothKernel(adapter, BluetoothConstants.OzobotService, BluetoothConstants.OzobotControlCharacteristic, null);
+                kernel.BluetoothAddress = info.BluetoothAddress;
+                await kernel.ConnectAsync();
+                while (!kernel.IsConnected)
+                {
+                    Console.WriteLine("Waiting...");
+                }
                 var command = "50-02-01";
-                await characteristic.WriteValueAsync(BytesStringUtil.StringToData(command));
-                var command2 = "68-FF-00-64-64-14";
-                await characteristic.WriteValueAsync(BytesStringUtil.StringToData(command2));
+                await kernel.SendBytesAsync(BytesStringUtil.StringToData(command));
+                var command2 = "68-00-FF-64-00-14";
+                await kernel.SendBytesAsync(BytesStringUtil.StringToData(command2));
+                Console.WriteLine("Sent command");
             });
             Console.WriteLine("Press Enter to cancel");
             Console.ReadLine();

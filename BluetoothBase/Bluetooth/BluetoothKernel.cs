@@ -14,9 +14,14 @@ namespace BluetoothBase.Bluetooth
         private IBluetoothService _service = null;
         private IBluetoothCharacteristic _characteristic = null;
 
-        public BluetoothKernel(IBluetoothAdapter bluetoothAdapter, ILogger<BluetoothKernel> logger = default)
+        private string _bluetoothServiceGuid;
+        private string _bluetoothCharacteristicGuid;
+
+        public BluetoothKernel(IBluetoothAdapter bluetoothAdapter, string bluetoothServiceGuid, string bluetoothCharacteristicGuid, ILogger<BluetoothKernel> logger = default)
         {
             _bluetoothAdapter = bluetoothAdapter ?? throw new ArgumentNullException(nameof(bluetoothAdapter));
+            _bluetoothServiceGuid = bluetoothServiceGuid;
+            _bluetoothCharacteristicGuid = bluetoothCharacteristicGuid;
             _logger = logger;
         }
 
@@ -25,8 +30,8 @@ namespace BluetoothBase.Bluetooth
         public async Task ConnectAsync()
         {
             _device = await _bluetoothAdapter.GetDeviceAsync(BluetoothAddress);
-            _service = await _device.GetServiceAsync(new Guid(BluetoothConstants.LegoHubService));
-            _characteristic = await _service.GetCharacteristicAsync(new Guid(BluetoothConstants.LegoHubCharacteristic));
+            _service = await _device.GetServiceAsync(new Guid(_bluetoothServiceGuid));
+            _characteristic = await _service.GetCharacteristicAsync(new Guid(_bluetoothCharacteristicGuid));
 
             _logger?.LogDebug("Connected");
         }
